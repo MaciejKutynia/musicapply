@@ -2,26 +2,123 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+    @apply flex text-white bg-black flex-col min-h-screen;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+main {
+    @apply flex-1 flex items-start flex-col overflow-auto relative pb-8;
+}
+
+.btn {
+    @apply flex justify-center gap-2 uppercase text-lg px-4 py-2 cursor-pointer bg-transparent rounded-lg border border-border;
+
+    svg {
+        @apply text-2xl;
+    }
+}
+
+.track-container {
+    @media (min-width: 900px) {
+        grid-template-rows: repeat(auto-fit, 20rem);
+    }
+}
+
+.search-form {
+    @apply relative flex items-center justify-end border border-border rounded-lg;
+
+    input {
+        @apply bg-transparent outline-none p-2;
+    }
+
+    button {
+        @apply p-1 border-l-border border-l py-2 px-4;
+    }
+}
+
+.track-item {
+    @apply relative rounded-lg flex flex-col items-center justify-center m-auto cursor-pointer w-full h-full py-4 lg:px-4;
+    @apply lg:min-h-80 lg:flex-row;
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(211, 97, 243, 0.55);
+    border-bottom: 1px solid rgba(211, 97, 243, 0.55);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+
+    &:hover {
+        @apply scale-105;
+    }
+}
+
+.control-volume {
+    width: 160px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.range-input-control {
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+    background: #4d4d4d;
+    border-radius: 8px;
+    height: 0.5rem;
+
+    input {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        -webkit-appearance: none;
+        background: transparent;
+        outline: none;
+        padding: 1rem 0;
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+}
+
+svg, path {
+    @apply pointer-events-none;
+}
+
+.input-animation {
+    background: #8E00B8;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.loop-active {
+    @apply text-[#8E00B8];
+}
+
+.player-bottom {
+    border-top: 2px solid rgba(211, 97, 243, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.indicator-container path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 60;
+    animation: dash 2.5s forwards alternate infinite;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 60;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
 }
