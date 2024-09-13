@@ -16,7 +16,7 @@ export default function Home() {
         <>
             <Header/>
             <main>
-                <LoadingIndicator type='container' isVisible={is_loading}/>
+                <LoadingIndicator type='container' is_visible={is_loading}/>
                 <Tracks/>
                 <Favourites/>
             </main>

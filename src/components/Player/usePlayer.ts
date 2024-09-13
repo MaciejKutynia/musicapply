@@ -15,7 +15,6 @@ const usePlayer = () => {
         toggleIsPlaying,
         selected_track,
         is_playing,
-        player_ref,
         is_loop,
         setIsLoop,
         setSelectedTrack
@@ -44,9 +43,9 @@ const usePlayer = () => {
 
     useEffect(() => {
         if (is_playing) {
-            player_ref?.current?.play()
+            audioRef?.current?.play()
         }
-    }, [is_playing, player_ref]);
+    }, [is_playing, audioRef]);
 
     const onVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const volume_value = +e.target.value

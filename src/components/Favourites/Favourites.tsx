@@ -13,7 +13,7 @@ const Favourites = () => {
     return (
         <div
             className={`absolute h-full w-full bg-black transition-all grid grid-cols-1 gap-8 px-8 track-container flex-1 pt-4 lg:grid-cols-4 ${is_favourites_visible ? 'left-0' : '-left-full'}`}>
-            <LoadingIndicator type='container' isVisible={is_loading}/>
+            <LoadingIndicator type='container' is_visible={is_loading}/>
 
             {favourites.length ? favourites?.map(track => <SingleTrackItem track={track} key={track.id}/>) :
                 <span>Brak piosenek dodanych do ulubionych</span>}
