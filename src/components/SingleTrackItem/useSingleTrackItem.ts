@@ -5,7 +5,7 @@ import {SingleTrackItemPropsInterface} from "@/interfaces/singleTrackItem.interf
 const useSingleTrackItem = (props: SingleTrackItemPropsInterface) => {
 
     const {track} = props
-    const {setSelectedTrack, toggleIsPlaying, is_playing} = usePlayerStore()
+    const {setSelectedTrack, toggleIsPlaying} = usePlayerStore()
 
     const selectTrackHandler = (e: MouseEvent) => {
         const {nodeName} = e.target as HTMLElement || {}
