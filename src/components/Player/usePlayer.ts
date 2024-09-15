@@ -21,6 +21,8 @@ const usePlayer = () => {
     } = usePlayerStore()
 
     const audioRef: MutableRefObject<HTMLAudioElement | null> = useRef(null)
+    const nameBoxRef: MutableRefObject<HTMLDivElement | null> = useRef(null)
+    const nameRef: MutableRefObject<HTMLParagraphElement | null> = useRef(null)
 
 
     const [volume, volumeChangeHandler] = useState(1)
@@ -28,6 +30,7 @@ const usePlayer = () => {
     const [current_time, updateCurrentTime] = useState(0)
     const [duration, updateDuration] = useState(0)
     const [percentage, setPercentage] = useState(0);
+    const [translate_value, setTranslateValue] = useState(0)
 
     const track_anim_value = {
         left: `${-100 + percentage}%`,
@@ -42,10 +45,16 @@ const usePlayer = () => {
     }, []);
 
     useEffect(() => {
-        if (is_playing) {
-            audioRef?.current?.play()
-        }
-    }, [is_playing, audioRef]);
+        audioRef?.current?.play()
+        toggleIsPlaying(true)
+    }, [selected_track, audioRef]);
+
+    useEffect(() => {
+        const box_width = nameBoxRef?.current?.clientWidth || 0;
+        const name_width = nameRef?.current?.clientWidth || 0;
+        const value = box_width - name_width;
+        setTranslateValue(value < 0 ? value : 0)
+    }, [nameRef, nameBoxRef, selected_track]);
 
     const onVolumeChange = (e: ChangeEvent<HTMLInputElement>) => {
         const volume_value = +e.target.value
@@ -90,10 +99,11 @@ const usePlayer = () => {
             }
             return
         }
-        changeSongHandler('next')
+        await changeSongHandler('next')
     }
 
-    const changeSongHandler = (direction: DirectionType) => {
+    const changeSongHandler = async (direction: DirectionType) => {
+        audioRef.current?.pause()
         const list: TrackInterface[] = is_favourites_visible ? favourites : tracks
         const track_index = list.findIndex(track => track.id === selected_track?.id)
         const last_index = list.length - 1
@@ -138,8 +148,11 @@ const usePlayer = () => {
         duration,
         is_loop,
         is_playing,
+        nameRef,
+        nameBoxRef,
         selected_track,
         track_anim_value,
+        translate_value,
         volume,
         volume_anim_value,
         changeLoopHandler,
