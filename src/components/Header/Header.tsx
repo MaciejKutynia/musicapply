@@ -8,12 +8,15 @@ import useHeader from "@/components/Header/useHeader";
 
 const Header = () => {
 
-    const {search_term, onFormSubmit, onInputChange, toggleFavouritesHandler} = useHeader()
+    const {search_term, onFormSubmit, onInputChange, toggleFavouritesHandler, is_favourites_visible} = useHeader()
+
 
     return (
         <header className='mx-auto px-6 py-4 w-full sticky top-0 z-20 bg-black'>
             <div className='flex lg:items-center justify-between gap-4 mb-4 flex-col lg:flex-row'>
-                <button className='btn order-last lg:order-none' onClick={toggleFavouritesHandler}>
+                <button
+                    className={`btn order-last lg:order-none transition-all duration-300 ${is_favourites_visible ? 'text-black !bg-white' : ''}`}
+                    onClick={toggleFavouritesHandler}>
                     <span>Ulubione</span>
                     <FontAwesomeIcon icon={faHeart}/>
                 </button>

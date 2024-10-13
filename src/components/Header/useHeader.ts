@@ -41,7 +41,7 @@ const useHeader = () => {
         toggleIsLoading(false)
     }
 
-    return {search_term, onFormSubmit, onInputChange, toggleFavouritesHandler}
+    return {search_term, onFormSubmit, onInputChange, toggleFavouritesHandler, is_favourites_visible}
 }
 
 export default useHeader

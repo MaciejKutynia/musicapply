@@ -38,7 +38,12 @@ main {
 
 .track-item {
     @apply relative rounded-lg flex flex-col items-center justify-center m-auto cursor-pointer w-full h-full py-4 lg:px-4;
-    @apply lg:min-h-80 lg:flex-row;
+
+
+    @apply lg:min-h-80 lg:flex-col lg:gap-2 ;
+
+    @apply xl:flex-row xl:gap-0;
+
     background: rgba(255, 255, 255, 0.1);
     border-right: 1px solid rgba(211, 97, 243, 0.55);
     border-bottom: 1px solid rgba(211, 97, 243, 0.55);
