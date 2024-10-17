@@ -19,6 +19,10 @@ const useHeader = () => {
         fetchTracksHandler()
     }, []);
 
+    useEffect(() => {
+        if (!search_term) fetchTracksHandler()
+    }, [search_term]);
+
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const {value} = e.target || {}
         handleSearch(value)

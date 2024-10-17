@@ -19,6 +19,7 @@ main {
 }
 
 .track-container {
+    @apply w-full;
     @media (min-width: 900px) {
         grid-template-rows: repeat(auto-fit, 20rem);
     }
